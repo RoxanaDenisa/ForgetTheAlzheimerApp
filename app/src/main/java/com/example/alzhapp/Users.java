@@ -8,7 +8,9 @@ public class Users {
     private String adresaMail;
     private String parola;
     private String codDoctor;
-    public Users(String numeComplet, String adresa, String telefon, String numeSupraveghetor, String telefonSupraveghetor, String adresaMail, String parola, String codDoctor){
+    private String tipUtilizator;
+
+    public Users(String numeComplet, String adresa, String telefon, String numeSupraveghetor, String telefonSupraveghetor, String adresaMail, String parola, String codDoctor,String tipUtilizator){
         this.numeComplet=numeComplet;
         this.adresa=adresa;
         this.telefon=telefon;
@@ -17,8 +19,16 @@ public class Users {
         this.adresaMail=adresaMail;
         this.parola=parola;
         this.codDoctor=codDoctor;
+        this.tipUtilizator=tipUtilizator;
     }
-
+    public Users(String numeComplet,String adresaMail, String parola,String telefon,String adresa,String tipUtilizator){
+        this.numeComplet=numeComplet;
+        this.adresa=adresa;
+        this.telefon=telefon;
+        this.adresaMail=adresaMail;
+        this.parola=parola;
+        this.tipUtilizator=tipUtilizator;
+    }
     public String getNumeComplet() {
         return numeComplet;
     }
@@ -49,5 +59,8 @@ public class Users {
 
     public String getCodDoctor() {
         return codDoctor;
+    }
+    public String getTipUtilizator() {
+        return tipUtilizator;
     }
 }
