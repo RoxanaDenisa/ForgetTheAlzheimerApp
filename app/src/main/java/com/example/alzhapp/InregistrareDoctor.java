@@ -1,5 +1,7 @@
 package com.example.alzhapp;
 
+import static com.example.alzhapp.AESCrypt.encrypt;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -66,9 +68,14 @@ public class InregistrareDoctor extends AppCompatActivity {
                 }
                 else {
                     if (parola1.equals(confirmareParola1)) {
-                        Users doctor = new Users(numeComplet1, adresaMail1, parola1, telefon1, adresa1, "doctor");
-                        dbRef.child("users").push().setValue(doctor);
-                        Toast.makeText(InregistrareDoctor.this, "Cont creat", Toast.LENGTH_SHORT).show();
+                        try {
+                            String newpas=encrypt(parola1);
+                            Users doctor = new Users(numeComplet1, adresaMail1, newpas, telefon1, adresa1, "doctor");
+                            dbRef.child("users").push().setValue(doctor);
+                            Toast.makeText(InregistrareDoctor.this, "Cont creat", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         Toast.makeText(InregistrareDoctor.this, "Introduceți aceeași parolă", Toast.LENGTH_SHORT).show();
                     }
