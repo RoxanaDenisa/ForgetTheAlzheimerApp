@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ForgetTheAlzheimerApp</string>
+    <string name="Creare_cont">Creare cont</string>
+    <string name="Nume_complet">Nume complet</string>
+    <string name="Adresa">Adresa</string>
+    <string name="Telefon">Telefon</string>
+    <string name="Nume_supraveghetor">Nume supraveghetor</string>
+    <string name="Telefon_supraveghetor">Telefon supraveghetor</string>
+    <string name="Adresa_mail">Adresa mail</string>
+    <string name="Parola">Parola</string>
+    <string name="Confirmare_parola">Confirmare parola</string>
+    <string name="Cod_doctor">Cod doctor</string>
+    <string name="Aveti_cont">Aveți deja un cont?\nAutentificare</string>
+    <string name="inregistrare">Înregistrare</string>
+    <string name="bPacient">Pacient</string>
+    <string name="bDoctor">Doctor</string>
+    <string name="autentificare">Autentificare</string>
+    <string name="Nu_aveti_cont">Nu aveți încă un cont?\nCreați unul</string>
+</resources>

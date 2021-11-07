@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:duration="20"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.alzhapp.Autentificare"
+    android:gravity="center"
+    android:background="#07040D"
+    android:paddingTop="0dp">
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:paddingLeft="26dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:text="@string/autentificare"
+            style="@style/titlu"
+            />
+
+        <EditText
+            android:id="@+id/Adresa_mail_utilizatori"
+            android:hint="@string/Adresa_mail"
+            style="@style/my_edit_text" />
+        <EditText
+            android:id="@+id/Parola_utilizatori"
+            android:hint="@string/Parola"
+            android:inputType="textPassword"
+            style="@style/my_edit_text" />
+
+        <Button
+            style="@style/mybutton"
+            android:text="@string/autentificare"
+            app:backgroundTint="#A9968E"
+            app:cornerRadius="20dp"
+            app:strokeColor="#707070"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/buton_inregistrare"
+            android:text="@string/Nu_aveti_cont"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#07040D"
+            android:textAllCaps="false"
+            android:fontFamily="@font/bantitalic" />
+
+    </LinearLayout>
+</RelativeLayout>

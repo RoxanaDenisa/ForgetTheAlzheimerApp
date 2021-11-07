@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "862427346695",
+    "project_id": "alzhapp-b5ff8",
+    "storage_bucket": "alzhapp-b5ff8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862427346695:android:e0acaf2717e940e80af7a2",
+        "android_client_info": {
+          "package_name": "com.example.alzhapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862427346695-uj35011ui08dt95m8q49pc23rh0v28b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alzhapp",
+            "certificate_hash": "4164a40f0b17d3eb1a6353b75c7ef76e595385dc"
+          }
+        },
+        {
+          "client_id": "862427346695-6ljpr06t8nbh4ksi9d76ocfs15of52b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMKhDK3h1tjEJlNq9QjGkgtPZXpuHvdCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862427346695-6ljpr06t8nbh4ksi9d76ocfs15of52b3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

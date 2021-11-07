@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="900"
+        android:font="@font/bkant"
+        app:fontStyle="normal"
+        app:fontWeight="900"
+        app:font="@font/bkant"
+        />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="900"
+        android:font="@font/bantitalic"
+        app:fontStyle="normal"
+        app:fontWeight="200"
+        app:font="@font/bantitalic"
+        />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="900"
+        android:font="@font/vladimir"
+        app:fontStyle="normal"
+        app:fontWeight="200"
+        app:font="@font/vladimir"
+        />
+</font-family>

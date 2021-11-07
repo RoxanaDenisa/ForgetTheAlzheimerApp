@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.alzhapp.MainActivity"
+    android:gravity="center"
+    android:background="#07040D"
+    android:paddingTop="0dp"
+    android:duration="20">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:insetTop="0dp">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mFirst"
+            android:orientation="horizontal"
+            android:insetTop="0dp">
+            <Button
+                android:id="@+id/bPacient"
+                android:text="@string/bPacient"
+                app:backgroundTint="#A9968E"
+                app:cornerRadius="0dp"
+                style="@style/button_bar" />
+
+            <Button
+                android:id="@+id/bDoctor"
+                android:text="@string/bDoctor"
+                app:backgroundTint="#534539"
+                app:cornerRadius="0dp"
+                style="@style/button_bar"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:paddingTop="16dp"
+            android:paddingLeft="26dp"
+            android:paddingBottom="16dp"
+            android:paddingRight="26dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_below="@+id/mFirst"
+            >
+            <TextView
+                android:text="@string/inregistrare"
+                style="@style/titlu"
+                />
+            <EditText
+                android:id="@+id/Nume"
+                android:hint="@string/Nume_complet"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Adresa"
+                android:hint="@string/Adresa"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Telefon"
+                android:hint="@string/Telefon"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Nume_supraveghetor"
+                android:hint="@string/Nume_supraveghetor"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Telefon_supraveghetor"
+                android:hint="@string/Telefon_supraveghetor"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Adresa_mail"
+                android:hint="@string/Adresa_mail"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Parola"
+                android:hint="@string/Parola"
+                android:inputType="textPassword"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Confirmare_parola"
+                android:hint="@string/Confirmare_parola"
+                android:inputType="textPassword"
+                style="@style/my_edit_text" />
+            <EditText
+                android:id="@+id/Cod_doctor"
+                android:hint="@string/Cod_doctor"
+                style="@style/my_edit_text" />
+
+            <Button
+                android:id="@+id/buton_send"
+                style="@style/mybutton"
+                android:text="@string/Creare_cont"
+                app:backgroundTint="#A9968E"
+                app:cornerRadius="20dp"
+                app:strokeColor="#707070"
+                app:strokeWidth="1dp" />
+
+            <Button
+                android:id="@+id/buton_autentif"
+                android:text="@string/Aveti_cont"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#07040D"
+                android:textAllCaps="false"
+                android:fontFamily="@font/bantitalic" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
