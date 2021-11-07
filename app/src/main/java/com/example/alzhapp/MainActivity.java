@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 //String confirmareParola1=confirmareParola.getText().toString();
                 String codDoctor1=codDoctor.getText().toString();
                 //System.out.println(numeComplet1);
-                Users users=new Users(numeComplet1,adresa1,telefon1,numeSupraveghetor1,telefonSupraveghetor1,adresaMail1,parola1,codDoctor1);
+                Users pacient=new Users(numeComplet1,adresa1,telefon1,numeSupraveghetor1,telefonSupraveghetor1,adresaMail1,parola1,codDoctor1, "pacient");
                 //dbRef.child("users").child("telefon1").setValue(users);
-                dbRef.child("users").child(telefon1).setValue(users);
+                dbRef.child("users").child(telefon1).setValue(pacient);
                 Toast.makeText(MainActivity.this,"Cont creat", Toast.LENGTH_SHORT).show();
             }
         });
