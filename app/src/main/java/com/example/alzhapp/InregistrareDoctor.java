@@ -60,7 +60,7 @@ public class InregistrareDoctor extends AppCompatActivity {
                 String adresaMail1=adresaMail.getText().toString();
                 String parola1=parola.getText().toString();
                 Users doctor=new Users(numeComplet1,adresaMail1,parola1,telefon1,adresa1, "doctor");
-                dbRef.child("users").child(telefon1).setValue(doctor);
+                dbRef.child("users").push().setValue(doctor);
                 Toast.makeText(InregistrareDoctor.this,"Cont creat", Toast.LENGTH_SHORT).show();
             }
         });

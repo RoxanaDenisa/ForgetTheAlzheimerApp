@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 //System.out.println(numeComplet1);
                 Users pacient=new Users(numeComplet1,adresa1,telefon1,numeSupraveghetor1,telefonSupraveghetor1,adresaMail1,parola1,codDoctor1, "pacient");
                 //dbRef.child("users").child("telefon1").setValue(users);
-                dbRef.child("users").child(telefon1).setValue(pacient);
+                dbRef.child("users").push().setValue(pacient);
                 Toast.makeText(MainActivity.this,"Cont creat", Toast.LENGTH_SHORT).show();
             }
         });
