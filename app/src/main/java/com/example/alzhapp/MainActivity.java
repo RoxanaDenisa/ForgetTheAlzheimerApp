@@ -72,13 +72,18 @@ public class MainActivity extends AppCompatActivity {
                 String parola1=parola.getText().toString();
                 String confirmareParola1=confirmareParola.getText().toString();
                 String codDoctor1=codDoctor.getText().toString();
-                if (parola1.equals(confirmareParola1)) {
-                    Users pacient=new Users(numeComplet1,adresa1,telefon1,numeSupraveghetor1,telefonSupraveghetor1,adresaMail1,parola1,codDoctor1, "pacient");
-                    dbRef.child("users").push().setValue(pacient);
-                    Toast.makeText(MainActivity.this,"Cont creat", Toast.LENGTH_SHORT).show();
+                if (numeComplet1.equals("") || adresa1.equals("") || telefon1.equals("")||numeSupraveghetor1.equals("")|| telefonSupraveghetor1.equals("")||adresaMail1.equals("")||parola1.equals("")||confirmareParola1.equals("")||codDoctor1.equals("")){
+                    Toast.makeText(MainActivity.this,"Toate câmpurile trebuie completate", Toast.LENGTH_SHORT).show();
+
                 }
-                else{
-                    Toast.makeText(MainActivity.this,"Introduceți aceeași parolă", Toast.LENGTH_SHORT).show();
+                else {
+                    if (parola1.equals(confirmareParola1)) {
+                        Users pacient = new Users(numeComplet1, adresa1, telefon1, numeSupraveghetor1, telefonSupraveghetor1, adresaMail1, parola1, codDoctor1, "pacient");
+                        dbRef.child("users").push().setValue(pacient);
+                        Toast.makeText(MainActivity.this, "Cont creat", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Introduceți aceeași parolă", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }

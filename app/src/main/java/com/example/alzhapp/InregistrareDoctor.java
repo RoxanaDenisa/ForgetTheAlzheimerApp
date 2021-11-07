@@ -59,10 +59,21 @@ public class InregistrareDoctor extends AppCompatActivity {
                 String telefon1=telefon.getText().toString();
                 String adresaMail1=adresaMail.getText().toString();
                 String parola1=parola.getText().toString();
-                Users doctor=new Users(numeComplet1,adresaMail1,parola1,telefon1,adresa1, "doctor");
-                dbRef.child("users").push().setValue(doctor);
-                Toast.makeText(InregistrareDoctor.this,"Cont creat", Toast.LENGTH_SHORT).show();
-            }
+                String confirmareParola1=confirmareParola.getText().toString();
+                if (numeComplet1.equals("") || adresa1.equals("") || telefon1.equals("")||adresaMail1.equals("")||parola1.equals("")||confirmareParola1.equals("")){
+                    Toast.makeText(InregistrareDoctor.this,"Toate câmpurile trebuie completate", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    if (parola1.equals(confirmareParola1)) {
+                        Users doctor = new Users(numeComplet1, adresaMail1, parola1, telefon1, adresa1, "doctor");
+                        dbRef.child("users").push().setValue(doctor);
+                        Toast.makeText(InregistrareDoctor.this, "Cont creat", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(InregistrareDoctor.this, "Introduceți aceeași parolă", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                }
         });
     }
 
