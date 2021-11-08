@@ -42,7 +42,8 @@
             app:backgroundTint="#A9968E"
             app:cornerRadius="20dp"
             app:strokeColor="#707070"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="1dp"
+            android:id="@+id/autentificare"/>
 
         <Button
             android:id="@+id/buton_inregistrare"
