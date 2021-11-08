@@ -51,12 +51,15 @@ public class Autentificare extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int ok=0;
+                        String tip="";
                         for (DataSnapshot snapshot1:snapshot.getChildren()) {
                             String s=snapshot1.child("adresaMail").getValue().toString();
                             String p=snapshot1.child("parola").getValue().toString();
+
                             try {
                                 String p1=decrypt(p);
                                 if (s.equals(adresaMail1)&& p1.equals(parola1)){
+                                    tip=snapshot1.child("tipUtilizator").getValue().toString();
                                     ok=1;
                                 }
                             } catch (Exception e) {
@@ -64,9 +67,15 @@ public class Autentificare extends AppCompatActivity {
                             }
 
                         }
-                        if (ok==1){
-                            Intent i=new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaDoctor.class);
-                            startActivity(i);
+                        if (ok==1 ){
+                            if (tip.equals("doctor")) {
+                                Intent i = new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaDoctor.class);
+                                startActivity(i);
+                            }
+                            else{
+                                Intent i = new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaPacient.class);
+                                startActivity(i);
+                            }
                         }
                         else{
                             Toast.makeText(Autentificare.this, "Date introduse greșit", Toast.LENGTH_SHORT).show();
