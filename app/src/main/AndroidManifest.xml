@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlzhApp">
         <activity
+            android:name=".PaginaPrincipalaPacient"
+            android:exported="false" />
+        <activity
+            android:name=".PaginaPrincipalaDoctor"
+            android:exported="false" />
+        <activity
             android:name=".InregistrareDoctor"
             android:exported="false" />
         <activity
