@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText adresaMail;
     private EditText parola;
     private EditText confirmareParola;
-    private EditText codDoctor;
+    private EditText mailDoctor;
     private Button sendData;
     private DatabaseReference dbRef;
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         adresaMail=findViewById(R.id.Adresa_mail);
         parola=findViewById(R.id.Parola);
         confirmareParola=findViewById(R.id.Confirmare_parola);
-        codDoctor=findViewById(R.id.Cod_doctor);
+        mailDoctor=findViewById(R.id.Mail_doctor);
         sendData=findViewById(R.id.buton_send);
         dbRef= FirebaseDatabase.getInstance().getReference();
 
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 String adresaMail1=adresaMail.getText().toString();
                 String parola1=parola.getText().toString();
                 String confirmareParola1=confirmareParola.getText().toString();
-                String codDoctor1=codDoctor.getText().toString();
-                if (numeComplet1.equals("") || adresa1.equals("") || telefon1.equals("")||numeSupraveghetor1.equals("")|| telefonSupraveghetor1.equals("")||adresaMail1.equals("")||parola1.equals("")||confirmareParola1.equals("")||codDoctor1.equals("")){
+                String mailDoctor1=mailDoctor.getText().toString();
+                if (numeComplet1.equals("") || adresa1.equals("") || telefon1.equals("")||numeSupraveghetor1.equals("")|| telefonSupraveghetor1.equals("")||adresaMail1.equals("")||parola1.equals("")||confirmareParola1.equals("")||mailDoctor1.equals("")){
                     Toast.makeText(MainActivity.this,"Toate câmpurile trebuie completate", Toast.LENGTH_SHORT).show();
 
                 }
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     if (parola1.equals(confirmareParola1)) {
                         try {
                             String newpas=encrypt(parola1);
-                            Users pacient = new Users(numeComplet1, adresa1, telefon1, numeSupraveghetor1, telefonSupraveghetor1, adresaMail1, newpas, codDoctor1, "pacient");
+                            Users pacient = new Users(numeComplet1, adresa1, telefon1, numeSupraveghetor1, telefonSupraveghetor1, adresaMail1, newpas, mailDoctor1, "pacient");
                             dbRef.child("users").push().setValue(pacient);
                             Toast.makeText(MainActivity.this, "Cont creat", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {

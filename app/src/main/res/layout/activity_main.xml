@@ -87,8 +87,8 @@
                 android:inputType="textPassword"
                 style="@style/my_edit_text" />
             <EditText
-                android:id="@+id/Cod_doctor"
-                android:hint="@string/Cod_doctor"
+                android:id="@+id/Mail_doctor"
+                android:hint="@string/Mail_doctor"
                 style="@style/my_edit_text" />
 
             <Button

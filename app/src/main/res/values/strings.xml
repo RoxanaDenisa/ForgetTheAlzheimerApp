@@ -16,4 +16,5 @@
     <string name="bDoctor">Doctor</string>
     <string name="autentificare">Autentificare</string>
     <string name="Nu_aveti_cont">Nu aveți încă un cont?\nCreați unul</string>
+    <string name="Mail_doctor">Adresa mail doctor</string>
 </resources>
