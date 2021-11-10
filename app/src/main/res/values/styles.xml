@@ -54,5 +54,11 @@
         <item name="android:textSize">30dp</item>
         <item name="android:fontFamily">@font/bkant</item>
     </style>
-
+    <style name="texte2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#E4DCD4</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/bkant</item>
+    </style>
 </resources>
