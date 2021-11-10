@@ -34,6 +34,7 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_below="@+id/layout"
+            android:id="@+id/layout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -41,7 +42,7 @@
             <TextView
                 android:id="@+id/textDr"
                 style="@style/texte"
-                android:text="Dr." />
+                android:text="Dr. " />
 
             <TextView
                 android:id="@+id/numeDr"
@@ -49,7 +50,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <TextView
+            android:paddingTop="20dp"
+            android:id="@+id/pacientiiDvs"
+            style="@style/texte"
+            android:text="Pacienții dumneavoastră:"
+            android:layout_below="@+id/layout2"/>
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pacientiiDvs"
+            android:id="@+id/myBoxPacienti"
+            />
     </RelativeLayout>
 </ScrollView>

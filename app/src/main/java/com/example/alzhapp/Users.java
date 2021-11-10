@@ -21,6 +21,7 @@ public class Users {
         this.mailDoctor=mailDoctor;
         this.tipUtilizator=tipUtilizator;
     }
+    public Users(){}
     public Users(String numeComplet,String adresaMail, String parola,String telefon,String adresa,String tipUtilizator){
         this.numeComplet=numeComplet;
         this.adresa=adresa;
@@ -29,6 +30,7 @@ public class Users {
         this.parola=parola;
         this.tipUtilizator=tipUtilizator;
     }
+
     public String getNumeComplet() {
         return numeComplet;
     }
