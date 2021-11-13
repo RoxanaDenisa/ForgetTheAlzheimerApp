@@ -2,6 +2,7 @@ package com.example.alzhapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         Users user = list.get(position);
         holder.name.setText(user.getNumeComplet());
 
+        //vizualizare informatii pacienti
+        holder.showInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid=list.get(holder.getAdapterPosition()).getUid();
+                Intent i=new Intent(context, com.example.alzhapp.DetaliiPacienti.class);
+                i.putExtra("uid",uid);
+                context.startActivity(i);
+
+            }
+        });
         //stergere din baza de date
 
         holder.delBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +82,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 });
                 builder.show();
             }
+
         });
 
     }
@@ -83,11 +96,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         TextView name;
         ImageButton delBtn;
+        ImageButton showInfo;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             delBtn=itemView.findViewById(R.id.delete_btn);
+            showInfo=itemView.findViewById(R.id.view_btn);
 
         }
     }
