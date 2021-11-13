@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:duration="20"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaginaPrincipalaDoctor">
+    tools:context="com.example.alzhapp.PaginaPrincipalaDoctor"
+    android:gravity="center"
+    android:background="#07040D"
+    android:paddingTop="0dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout"
+            android:layout_marginRight="20dp"
+            android:gravity="right">
+
+            <ImageButton
+                android:id="@+id/logout_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="#07040D"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:src="@drawable/ic_logout" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_below="@+id/layout"
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textDr"
+                style="@style/texte"
+                android:text="Dr. " />
+
+            <TextView
+                android:id="@+id/numeDr"
+                style="@style/texte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:paddingTop="20dp"
+            android:id="@+id/pacientiiDvs"
+            style="@style/texte"
+            android:text="Pacienții dumneavoastră:"
+            android:layout_below="@+id/layout2"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pacientiiDvs"
+            android:id="@+id/myBoxPacienti"
+            />
+    </RelativeLayout>
+</ScrollView>
