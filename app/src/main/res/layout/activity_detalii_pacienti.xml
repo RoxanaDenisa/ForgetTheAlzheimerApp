@@ -152,6 +152,7 @@
             android:layout_height="wrap_content"
             style="@style/mybutton2"
             android:text="Localizează pacient"
+            android:drawableLeft="@drawable/ic_location"
             />
     </LinearLayout>
 
