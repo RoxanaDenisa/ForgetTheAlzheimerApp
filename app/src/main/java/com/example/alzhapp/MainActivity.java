@@ -94,11 +94,14 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast.makeText(MainActivity.this,"Adaugati o adresa de mail valida!", Toast.LENGTH_SHORT).show();
                 }
+                else if(parola.length()<6){
+                    Toast.makeText(MainActivity.this,"Adaugati o parola de cel putin 6 caractere", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     //verificare daca parolele corespund
                     if (parola1.equals(confirmareParola1)) {
 
-                       //adaugare date in auth si real time db
+                        //adaugare date in auth si real time db
                         fauth.createUserWithEmailAndPassword(adresaMail1,parola1).
                                 addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
@@ -117,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
                                                             Intent i=new Intent(MainActivity.this, com.example.alzhapp.Autentificare.class);
                                                             startActivity(i);
                                                         }
-                                                          else
-                                                              {
-                                                                  Toast.makeText(MainActivity.this, "eroare creare cont", Toast.LENGTH_SHORT).show();
-                                                              }
+                                                        else
+                                                        {
+                                                            Toast.makeText(MainActivity.this, "eroare creare cont", Toast.LENGTH_SHORT).show();
+                                                        }
                                                     }
                                                 });
                                             }catch(Exception e){

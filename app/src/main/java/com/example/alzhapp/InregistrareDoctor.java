@@ -80,6 +80,9 @@ public class InregistrareDoctor extends AppCompatActivity {
                 {
                     Toast.makeText(InregistrareDoctor.this,"Adaugati o adresa de mail valida!", Toast.LENGTH_SHORT).show();
                 }
+                else if(parola.length()<6){
+                    Toast.makeText(InregistrareDoctor.this,"Adaugati o parola de cel putin 6 caractere", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     if (parola1.equals(confirmareParola1)) {
                         fauth.createUserWithEmailAndPassword(adresaMail1,parola1).
@@ -117,7 +120,7 @@ public class InregistrareDoctor extends AppCompatActivity {
                         Toast.makeText(InregistrareDoctor.this, "Introduceți aceeași parolă", Toast.LENGTH_SHORT).show();
                     }
                 }
-                }
+            }
         });
     }
 
