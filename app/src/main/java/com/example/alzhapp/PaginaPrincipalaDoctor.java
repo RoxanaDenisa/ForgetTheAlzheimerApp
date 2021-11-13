@@ -95,5 +95,7 @@ public class PaginaPrincipalaDoctor extends AppCompatActivity {
 
             }
         });
+
     }
+
 }
