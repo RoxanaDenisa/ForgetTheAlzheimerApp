@@ -19,4 +19,9 @@
     <string name="Mail_doctor">Adresa mail doctor</string>
     <string name="editeaza">Editează</string>
     <string name="medicamentatie">Medicamentatie</string>
+    <string name="adaugaremedicament">Adaugare medicament</string>
+    <string name="numemedicament">Nume medicament</string>
+    <string name="oraRef">Ora de referinta</string>
+    <string name="interval">Interval</string>
+    <string name="salvare">Salvare</string>
 </resources>

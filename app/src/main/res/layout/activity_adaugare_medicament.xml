@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:duration="20"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.alzhapp.AdaugareMedicament"
+    android:gravity="center"
+    android:background="#07040D"
+    android:paddingTop="0dp">
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:paddingLeft="26dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:text="@string/adaugaremedicament"
+            style="@style/titlu"
+            />
+
+        <EditText
+            android:id="@+id/Nume_medicament"
+            android:hint="@string/numemedicament"
+            style="@style/my_edit_text" />
+        <EditText
+            android:id="@+id/ora_referinta"
+            android:hint="@string/oraRef"
+            style="@style/my_edit_text" />
+        <EditText
+            android:id="@+id/interval"
+            android:hint="@string/interval"
+            style="@style/my_edit_text" />
+
+        <Button
+            style="@style/mybutton"
+            android:text="@string/salvare"
+            app:backgroundTint="#A9968E"
+            app:cornerRadius="20dp"
+            app:strokeColor="#707070"
+            app:strokeWidth="1dp"
+            android:id="@+id/salvare"/>
+
+
+
+    </LinearLayout>
+</RelativeLayout>
