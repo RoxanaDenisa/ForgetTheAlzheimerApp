@@ -52,7 +52,9 @@ public class DetaliiPacienti extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(DetaliiPacienti.this,Medicamentatie.class));
+                Intent i=new Intent(DetaliiPacienti.this,Medicamentatie.class);
+                i.putExtra("uid",uid);
+                startActivity(i);
             }
         });
 

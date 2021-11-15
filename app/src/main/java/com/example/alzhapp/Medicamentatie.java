@@ -14,6 +14,7 @@ public class Medicamentatie extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String uid=getIntent().getStringExtra("uid");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicamentatie);
 
@@ -22,7 +23,9 @@ public class Medicamentatie extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Medicamentatie.this,AdaugareMedicament.class));
+                Intent i=new Intent(Medicamentatie.this,AdaugareMedicament.class);
+                i.putExtra("uid",uid);
+                startActivity(i);
             }
         });
     }
