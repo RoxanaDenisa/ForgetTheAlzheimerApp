@@ -4,22 +4,32 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DetaliiPacienti extends AppCompatActivity {
-    private TextView numeP;
-    private TextView telefonP;
-    private TextView emailP;
-    private TextView numeS;
-    private TextView telefonS;
-    private DatabaseReference db;
+import java.util.HashMap;
+import java.util.Map;
 
+public class DetaliiPacienti extends AppCompatActivity {
+    private EditText numeP;
+    private EditText telefonP;
+    private EditText emailP;
+    private EditText numeS;
+    private EditText telefonS;
+    private DatabaseReference db;
+    private Button editeaza_p;
+    private Button editeaza_s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
@@ -30,8 +40,52 @@ public class DetaliiPacienti extends AppCompatActivity {
         emailP=findViewById(R.id.EmailP);
         numeS=findViewById(R.id.numeS);
         telefonS=findViewById(R.id.telefonS);
+        editeaza_p=findViewById(R.id.editeaza_pacient);
+        editeaza_s=findViewById(R.id.editeaza_supraveghetor);
         db= FirebaseDatabase.getInstance().getReference().child("users");
 
+        editeaza_p.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, Object> map=new HashMap<>();
+                map.put("numeComplet",numeP.getText().toString());
+                map.put("telefon",telefonP.getText().toString());
+                db.child(uid).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(DetaliiPacienti.this, "Editare cu succes", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetaliiPacienti.this, "Editare esuata", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+        editeaza_s.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, Object> map=new HashMap<>();
+                map.put("numeSupraveghetor",numeS.getText().toString());
+                map.put("telefonSupraveghetor",telefonS.getText().toString());
+                db.child(uid).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(DetaliiPacienti.this, "Editare cu succes", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DetaliiPacienti.this, "Editare esuata", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
 
         db.addValueEventListener(new ValueEventListener() {
             @Override
