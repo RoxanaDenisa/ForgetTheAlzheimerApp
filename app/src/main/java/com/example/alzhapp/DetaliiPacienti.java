@@ -3,6 +3,7 @@ package com.example.alzhapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +32,7 @@ public class DetaliiPacienti extends AppCompatActivity {
     private DatabaseReference db;
     private Button editeaza_p;
     private Button editeaza_s;
+    private Button medicamentatie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
@@ -42,7 +45,16 @@ public class DetaliiPacienti extends AppCompatActivity {
         telefonS=findViewById(R.id.telefonS);
         editeaza_p=findViewById(R.id.editeaza_pacient);
         editeaza_s=findViewById(R.id.editeaza_supraveghetor);
+        medicamentatie=findViewById(R.id.medicamentatie);
         db= FirebaseDatabase.getInstance().getReference().child("users");
+
+        medicamentatie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(DetaliiPacienti.this,Medicamentatie.class));
+            }
+        });
 
         editeaza_p.setOnClickListener(new View.OnClickListener() {
             @Override
