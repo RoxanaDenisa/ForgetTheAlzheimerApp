@@ -146,10 +146,11 @@
 
         </RelativeLayout>
         <Button
+            android:id="@+id/medicamentatie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/mybutton2"
-            android:text="Medicamentație pacient"
+            android:text="Medicație pacient"
             />
         <Button
             android:layout_width="match_parent"

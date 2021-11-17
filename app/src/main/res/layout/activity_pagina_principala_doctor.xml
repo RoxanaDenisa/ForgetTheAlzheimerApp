@@ -58,10 +58,9 @@
             android:layout_below="@+id/layout2"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myBoxPacienti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pacientiiDvs"
-            android:id="@+id/myBoxPacienti"
-            />
+            android:layout_below="@+id/pacientiiDvs" />
     </RelativeLayout>
 </ScrollView>

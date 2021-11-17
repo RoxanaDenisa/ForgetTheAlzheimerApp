@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlzhApp">
         <activity
+            android:name=".AdaugareMedicament"
+            android:exported="false" />
+        <activity
+            android:name=".Medicatie"
+            android:exported="false" />
+        <activity
             android:name=".DetaliiPacienti"
             android:exported="false" />
         <activity

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:background="@drawable/my_box"
+        android:padding="18dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout"
+            android:layout_marginRight="0dp"
+            android:gravity="right">
+
+            <Button
+                android:id="@+id/delBtn"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:padding="0dp"
+                android:text="X"
+                android:backgroundTint="#2D2527"
+                android:textColor="#E4DCD4" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/numeMText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicament:"
+                style="@style/texte2"/>
+            <TextView
+                android:id="@+id/numeM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/texte2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/oraRefText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ora de referință:"
+                style="@style/texte2"/>
+            <TextView
+                android:id="@+id/oraRef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/texte2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/intervalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Interval:"
+                style="@style/texte2"/>
+            <TextView
+                android:id="@+id/Interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/texte2"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
