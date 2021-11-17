@@ -66,6 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //delete from realtime db
+
+                        FirebaseDatabase.getInstance().getReference().child("medicament").child(list.get(holder.getAdapterPosition()).getUid()).removeValue();
                         FirebaseDatabase.getInstance().getReference().child("users").child(list.get(holder.getAdapterPosition()).getUid()).removeValue();
                         //remove from app
                         list.remove(list.get(holder.getAdapterPosition()));
