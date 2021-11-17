@@ -13,7 +13,7 @@
             android:name=".AdaugareMedicament"
             android:exported="false" />
         <activity
-            android:name=".Medicamentatie"
+            android:name=".Medicatie"
             android:exported="false" />
         <activity
             android:name=".DetaliiPacienti"

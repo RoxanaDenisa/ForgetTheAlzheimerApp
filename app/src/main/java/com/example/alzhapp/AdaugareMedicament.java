@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,13 +45,13 @@ public class AdaugareMedicament extends AppCompatActivity {
                     Toast.makeText(AdaugareMedicament.this,"Toate câmpurile trebuie completate", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Medicament m=new Medicament(numeMedicament1,oraReferinta1,interval1);
+                    Medicament m=new Medicament(numeMedicament1,oraReferinta1,interval1,uid);
                     db.child("medicament").child(uid).child(numeMedicament1).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(AdaugareMedicament.this, "Medicament adaugat", Toast.LENGTH_SHORT).show();
-                                Intent i=new Intent(AdaugareMedicament.this, Medicamentatie.class);
+                                Intent i=new Intent(AdaugareMedicament.this, Medicatie.class);
                                 i.putExtra("uid",uid);
                                 startActivity(i);
                             }

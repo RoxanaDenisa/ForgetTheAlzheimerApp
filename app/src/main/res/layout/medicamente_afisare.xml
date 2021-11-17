@@ -22,11 +22,12 @@
             android:gravity="right">
 
             <Button
+                android:id="@+id/delBtn"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:layout_gravity="right"
                 android:padding="0dp"
                 android:text="X"
+                android:backgroundTint="#2D2527"
                 android:textColor="#E4DCD4" />
         </LinearLayout>
         <LinearLayout
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="Medicament:"
                 style="@style/texte2"/>
-            <EditText
+            <TextView
                 android:id="@+id/numeM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ora de referință:"
                 style="@style/texte2"/>
-            <EditText
+            <TextView
                 android:id="@+id/oraRef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="Interval:"
                 style="@style/texte2"/>
-            <EditText
+            <TextView
                 android:id="@+id/Interval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

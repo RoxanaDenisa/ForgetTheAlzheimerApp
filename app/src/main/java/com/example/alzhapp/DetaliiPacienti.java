@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,7 +51,7 @@ public class DetaliiPacienti extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent i=new Intent(DetaliiPacienti.this,Medicamentatie.class);
+                Intent i=new Intent(DetaliiPacienti.this, Medicatie.class);
                 i.putExtra("uid",uid);
                 startActivity(i);
             }
