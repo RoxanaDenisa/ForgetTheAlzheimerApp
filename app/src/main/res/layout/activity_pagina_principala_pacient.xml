@@ -50,10 +50,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <Button
+            android:id="@+id/apeleaza_supraveghetor"
             style="@style/mybutton2"
             android:text="@string/apeleaz_supraveghetor"
             android:drawableLeft="@drawable/ic_phone"/>
         <Button
+            android:id="@+id/apeleaza_doctor"
             style="@style/mybutton2"
             android:text="@string/apeleaza_doctor"
             android:drawableLeft="@drawable/ic_phone"/>

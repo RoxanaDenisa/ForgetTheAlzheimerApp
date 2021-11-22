@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.*;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,8 +25,11 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class PaginaPrincipalaPacient extends AppCompatActivity {
+    private Button apeleaza_supraveghetor;
+    private Button apeleaza_doctor;
     RecyclerView recyclerView;
     DatabaseReference database;
+    DatabaseReference db;
     IstoricAdapter istoricAdapter;
     ArrayList<Istoric> list;
     private FirebaseUser user;
@@ -76,22 +81,30 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
 
             }
         });
+        apeleaza_supraveghetor=findViewById(R.id.apeleaza_supraveghetor);
+        apeleaza_doctor=findViewById(R.id.apeleaza_doctor);
+
+
+        apeleaza_supraveghetor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                db.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Users u=snapshot.getValue(Users.class);
+                        Intent intent=new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:"+u.getTelefonSupraveghetor()));
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
-    /*public void ordonare(ArrayList<Istoric> list){
-        int i;
-        int j;
-        Istoric ist;
-       for(i=0; i<list.size(); i++) {
-           for(j=i+1; j<list.size();j++){
-               int k=Integer.valueOf(list.get(i).getOra());
-               int l=Integer.valueOf(list.get(j).getOra());
-               if (k>l){
-                   ist=list.get(i);
-                   list.get(i)= list.get(j);
-               }
-           }
 
-       }
-
-    }*/
 }
