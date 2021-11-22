@@ -105,6 +105,44 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                 });
             }
         });
+        apeleaza_doctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db = FirebaseDatabase.getInstance().getReference().child("users");
+                db.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String mail="";
+                        for(DataSnapshot ds:snapshot.getChildren()) {
+                            Users u = ds.getValue(Users.class);
+                            if (u.getTipUtilizator().equals("pacient")) {
+                                if (u.getUid().equals(uid)) {
+                                    mail = u.getMailDoctor();
+                                    System.out.println(mail+"aiiiiiiiiiiiiiiiiiiiiiiici");
+                                    System.out.println(uid+"aiiiiiiiiiiiiiiiiiiiiiiici");
+                                }
+                            }
+
+                        }
+                        for (DataSnapshot ds:snapshot.getChildren()){
+                            Users u=ds.getValue(Users.class);
+                            if (u.getAdresaMail().equals(mail)){
+                                Intent intent=new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:"+u.getTelefon()));
+                                startActivity(intent);
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
 
 }
