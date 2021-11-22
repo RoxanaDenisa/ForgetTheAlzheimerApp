@@ -25,4 +25,7 @@
     <string name="interval">Interval</string>
     <string name="salvare">Salvare</string>
     <string name="medicatie">Medicatie</string>
+    <string name="istoricul_dumneavoastr">Istoricul dumneavoastră:</string>
+    <string name="apeleaz_supraveghetor">Apelează supraveghetor</string>
+    <string name="apeleaza_doctor">Apelează doctor</string>
 </resources>
