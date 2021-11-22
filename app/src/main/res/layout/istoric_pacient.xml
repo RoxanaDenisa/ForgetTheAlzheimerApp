@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/my_box"
+        android:gravity="center_vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/numeMedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicament:"
+                style="@style/texte2"/>
+            <TextView
+                android:id="@+id/numeMed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/texte2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/oraText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ora:"
+                style="@style/texte2"/>
+            <TextView
+                android:id="@+id/ora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/texte2"/>
+        </LinearLayout>
+        </LinearLayout>
+
+            <ImageButton
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
