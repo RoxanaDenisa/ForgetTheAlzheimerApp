@@ -51,10 +51,12 @@
         android:orientation="vertical">
         <Button
             style="@style/mybutton2"
-            android:text="@string/apeleaz_supraveghetor"/>
+            android:text="@string/apeleaz_supraveghetor"
+            android:drawableLeft="@drawable/ic_phone"/>
         <Button
             style="@style/mybutton2"
-            android:text="@string/apeleaza_doctor"/>
+            android:text="@string/apeleaza_doctor"
+            android:drawableLeft="@drawable/ic_phone"/>
 
     </LinearLayout>
 </RelativeLayout>
