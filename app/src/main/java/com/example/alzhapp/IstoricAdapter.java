@@ -1,6 +1,8 @@
 package com.example.alzhapp;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Observable;
+import java.util.Observer;
 
 
 public class IstoricAdapter extends RecyclerView.Adapter<IstoricAdapter.MyViewHolder> {
@@ -41,6 +46,7 @@ public class IstoricAdapter extends RecyclerView.Adapter<IstoricAdapter.MyViewHo
         Istoric m = list.get(position);
         holder.name.setText(m.getNume());
         holder.ora.setText(m.getOra());
+
     }
 
     @Override

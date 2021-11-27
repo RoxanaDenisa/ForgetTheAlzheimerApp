@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.*;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -32,6 +37,8 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
     DatabaseReference db;
     IstoricAdapter istoricAdapter;
     ArrayList<Istoric> list;
+
+    private  AlarmManager alarmManager;
     private FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +71,11 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                     int poz=0;
                     while((oi+ii*poz)<24){
                         String ora=String.valueOf(oi+ii*poz);
-                        poz++;
+
                         Istoric istoric=new Istoric(n,ora);
+                        //if(!checkAlarm(oi+ii*poz))
+                            setAlarm(oi+ii*poz);
+                        poz++;
                         list.add(istoric);
                         Collections.sort(list, Istoric.ordonare);
 
@@ -144,5 +154,26 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             }
         });
     }
-
+    public void setAlarm(int ora){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 15);
+        calendar.set(Calendar.MINUTE, 20);
+        calendar.set(Calendar.SECOND, 0);
+        System.out.println(ora+"AICIIIIIIIIIIIIIIIIIIIII" + calendar.get(Calendar.DAY_OF_YEAR) );
+        if (calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, MyReceiver.class);
+        intent.setAction(MyReceiver.ACTION_RECEIVER);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1001, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
+    private boolean checkAlarm(int ora) {
+        Intent intent = new Intent(this, MyReceiver.class);
+        intent.setAction(MyReceiver.ACTION_RECEIVER);
+        boolean isSet = PendingIntent.getBroadcast(this, 1001, intent, PendingIntent.FLAG_NO_CREATE) != null;
+        Log.e("MainActivity", isSet + " :Alarm is set");
+        return isSet;
+    }
 }
