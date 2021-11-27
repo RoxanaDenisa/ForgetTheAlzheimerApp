@@ -12,10 +12,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,7 +76,8 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
 
                         Istoric istoric=new Istoric(n,ora);
                         //if(!checkAlarm(oi+ii*poz))
-                            setAlarm(oi+ii*poz);
+                            setAlarm(oi+ii*poz,n);
+                            System.out.println(oi+ii*poz);
                         poz++;
                         list.add(istoric);
                         Collections.sort(list, Istoric.ordonare);
@@ -154,10 +157,10 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             }
         });
     }
-    public void setAlarm(int ora){
+    /*public void setAlarm(int ora){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 20);
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 21);
         calendar.set(Calendar.SECOND, 0);
         System.out.println(ora+"AICIIIIIIIIIIIIIIIIIIIII" + calendar.get(Calendar.DAY_OF_YEAR) );
         if (calendar.before(Calendar.getInstance())) {
@@ -175,5 +178,20 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         boolean isSet = PendingIntent.getBroadcast(this, 1001, intent, PendingIntent.FLAG_NO_CREATE) != null;
         Log.e("MainActivity", isSet + " :Alarm is set");
         return isSet;
+    }*/
+    private void setAlarm(int ora,String nume){
+        Intent intent=new Intent(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_HOUR,ora);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES,0);
+        intent.putExtra(AlarmClock.EXTRA_SKIP_UI,true);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE,nume);
+        if(intent.resolveActivity(getPackageManager())!=null){
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(PaginaPrincipalaPacient.this, "nu e bine",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }
