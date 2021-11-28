@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,10 @@ public class IstoricAdapter extends RecyclerView.Adapter<IstoricAdapter.MyViewHo
         Istoric m = list.get(position);
         holder.name.setText(m.getNume());
         holder.ora.setText(m.getOra());
+       /* Calendar calendar = Calendar.getInstance();
+        if (calendar.before(Calendar.getInstance())) {
+            holder.v1.setVisibility(View.VISIBLE);
+        }*/
 
     }
 
@@ -56,13 +61,16 @@ public class IstoricAdapter extends RecyclerView.Adapter<IstoricAdapter.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
+        ImageButton v1;
+        ImageButton v2;
         TextView name;
         TextView ora;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.numeMed);
             ora=itemView.findViewById(R.id.ora);
-
+            v1=itemView.findViewById(R.id.verificare);
+            v2=itemView.findViewById(R.id.verif);
 
         }
     }

@@ -1,6 +1,7 @@
 package com.example.alzhapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.util.Log;
@@ -39,8 +41,6 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
     DatabaseReference db;
     IstoricAdapter istoricAdapter;
     ArrayList<Istoric> list;
-
-    private  AlarmManager alarmManager;
     private FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +72,13 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                     int ii=Integer.valueOf(i);
                     int poz=0;
                     while((oi+ii*poz)<24){
-                        String ora=String.valueOf(oi+ii*poz);
 
+                        // apelarea functiei de setare a alarmei ce are ca si parametru ora la care setez alarma
+                        setAlarm(oi+ii*poz);
+
+                        //Aadugarea in lista istoric pt adapter
+                        String ora=String.valueOf(oi+ii*poz);
                         Istoric istoric=new Istoric(n,ora);
-                        //if(!checkAlarm(oi+ii*poz))
-                            setAlarm(oi+ii*poz,n);
-                            System.out.println(oi+ii*poz);
                         poz++;
                         list.add(istoric);
                         Collections.sort(list, Istoric.ordonare);
@@ -131,8 +132,6 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                             if (u.getTipUtilizator().equals("pacient")) {
                                 if (u.getUid().equals(uid)) {
                                     mail = u.getMailDoctor();
-                                    System.out.println(mail+"aiiiiiiiiiiiiiiiiiiiiiiici");
-                                    System.out.println(uid+"aiiiiiiiiiiiiiiiiiiiiiiici");
                                 }
                             }
 
@@ -157,41 +156,30 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             }
         });
     }
-    /*public void setAlarm(int ora){
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 17);
-        calendar.set(Calendar.MINUTE, 21);
-        calendar.set(Calendar.SECOND, 0);
-        System.out.println(ora+"AICIIIIIIIIIIIIIIIIIIIII" + calendar.get(Calendar.DAY_OF_YEAR) );
-        if (calendar.before(Calendar.getInstance())) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-        }
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, MyReceiver.class);
-        intent.setAction(MyReceiver.ACTION_RECEIVER);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1001, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-    }
-    private boolean checkAlarm(int ora) {
-        Intent intent = new Intent(this, MyReceiver.class);
-        intent.setAction(MyReceiver.ACTION_RECEIVER);
-        boolean isSet = PendingIntent.getBroadcast(this, 1001, intent, PendingIntent.FLAG_NO_CREATE) != null;
-        Log.e("MainActivity", isSet + " :Alarm is set");
-        return isSet;
-    }*/
-    private void setAlarm(int ora,String nume){
-        Intent intent=new Intent(AlarmClock.ACTION_SET_ALARM);
-        intent.putExtra(AlarmClock.EXTRA_HOUR,ora);
-        intent.putExtra(AlarmClock.EXTRA_MINUTES,0);
-        intent.putExtra(AlarmClock.EXTRA_SKIP_UI,true);
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE,nume);
-        if(intent.resolveActivity(getPackageManager())!=null){
-            startActivity(intent);
-        }
-        else {
-            Toast.makeText(PaginaPrincipalaPacient.this, "nu e bine",Toast.LENGTH_SHORT).show();
-        }
-
+//alarma trebuie sa tina maxim jumatate de ora si minim pana isi ia pastila (ceva venit de la bratara)
+    //daca dupa 30min nu si.a luat pastila va aparea alerta la doctor pt pacientul respectiv
+    private void setAlarm(int ora) {
+        Calendar cal= Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH),
+                ora,
+                13,
+                0);
+        AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent= new Intent(this, MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),pendingIntent);
 
     }
-}
+    private void Alarm_cancel(int ora) {
+        /*AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent= new Intent(this, MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if(pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+        }*/
+        Toast.makeText(this,"Your Alarm is Cancel",Toast.LENGTH_LONG).show();
+        MyReceiver.ringtone.stop();
+    }
+    }
