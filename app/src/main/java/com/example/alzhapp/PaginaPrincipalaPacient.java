@@ -164,21 +164,22 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH),
                 ora,
-                13,
+                0,
                 0);
-        AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent= new Intent(this, MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),pendingIntent);
-
+        if (cal.getTime().after(Calendar.getInstance().getTime())){
+                AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent intent= new Intent(this, MyReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),pendingIntent);
+        }
     }
     private void Alarm_cancel(int ora) {
-        /*AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent= new Intent(this, MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         if(pendingIntent != null) {
             alarmManager.cancel(pendingIntent);
-        }*/
+        }
         Toast.makeText(this,"Your Alarm is Cancel",Toast.LENGTH_LONG).show();
         MyReceiver.ringtone.stop();
     }
