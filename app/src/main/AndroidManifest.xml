@@ -32,10 +32,10 @@
             android:name=".InregistrareDoctor"
             android:exported="false" />
         <activity
-            android:name=".Autentificare"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Autentificare"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

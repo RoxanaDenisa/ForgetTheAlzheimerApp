@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,12 @@ public class Autentificare extends AppCompatActivity {
         adresaMail=findViewById(R.id.Adresa_mail_utilizatori);
         parola=findViewById(R.id.Parola_utilizatori);
         autentificare=findViewById(R.id.autentificare);
-
+       FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null){
+                   redirectUserType(user.getEmail());
+                   System.out.println(user.getEmail()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    finish();
+                }
         moveToInregistrare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,33 +73,8 @@ public class Autentificare extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                DatabaseReference db= FirebaseDatabase.getInstance().getReference().child("users");
-                                db.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        String tip="";
-                                        for (DataSnapshot snapshot1:snapshot.getChildren()) {
-                                            String s=snapshot1.child("adresaMail").getValue().toString();
-                                            if (s.equals(adresaMail1)){
-                                                tip=snapshot1.child("tipUtilizator").getValue().toString();
-                                                System.out.println(tip);
-                                                if (tip.equals("doctor")) {
-                                                    Intent i = new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaDoctor.class);
-                                                    startActivity(i);
-                                                }
-                                                else{
-                                                    Intent i = new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaPacient.class);
-                                                    startActivity(i);
-                                                }
-                                            }
-                                        }
+                                redirectUserType(adresaMail1);
 
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
                             }
                             else
                             {
@@ -105,5 +86,36 @@ public class Autentificare extends AppCompatActivity {
 
                     });
     }}});
+    }
+    public void redirectUserType(String mail){
+        DatabaseReference db= FirebaseDatabase.getInstance().getReference().child("users");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String tip="";
+                for (DataSnapshot snapshot1:snapshot.getChildren()) {
+                    String s=snapshot1.child("adresaMail").getValue().toString();
+                    if (s.equals(mail)){
+                        tip=snapshot1.child("tipUtilizator").getValue().toString();
+                        System.out.println(tip);
+                        if (tip.equals("doctor")) {
+                            Intent i = new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaDoctor.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        else{
+                            Intent i = new Intent(Autentificare.this, com.example.alzhapp.PaginaPrincipalaPacient.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Autentificare.this,"nu deschide db",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
