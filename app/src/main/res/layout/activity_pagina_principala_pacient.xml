@@ -7,8 +7,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alzhapp.PaginaPrincipalaPacient"
-    android:gravity="center"
     android:background="#07040D"
-    android:paddingTop="0dp">
+    android:paddingTop="0dp"
+    >
+    <LinearLayout
 
+        android:id="@+id/istoriculdv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+    <TextView
+
+        android:layout_marginTop="15dp"
+
+        style="@style/texte"
+        android:paddingTop="20dp"
+        android:text="@string/istoricul_dumneavoastr" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_below="@+id/istoriculdv"
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myBoxIstoric"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
+        </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/apeleaza_supraveghetor"
+            style="@style/mybutton2"
+            android:text="@string/apeleaz_supraveghetor"
+            android:drawableLeft="@drawable/ic_phone"/>
+        <Button
+            android:id="@+id/apeleaza_doctor"
+            style="@style/mybutton2"
+            android:text="@string/apeleaza_doctor"
+            android:drawableLeft="@drawable/ic_phone"/>
+
+    </LinearLayout>
 </RelativeLayout>
