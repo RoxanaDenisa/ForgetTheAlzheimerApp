@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,10 +37,17 @@ public class DetaliiPacienti extends AppCompatActivity {
     private Button editeaza_s;
     private Button medicatie;
     private Button istoricpac;
+    private Button localizeaza;
+    LocationRequest lr;
+    private FusedLocationProviderClient locatie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
         super.onCreate(savedInstanceState);
+        lr = LocationRequest.create()
+                .setInterval(1000*30)
+                .setFastestInterval(1000*5)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         setContentView(R.layout.activity_detalii_pacienti);
         numeP=findViewById(R.id.numeP);
         telefonP=findViewById(R.id.telefonP);
@@ -47,6 +58,7 @@ public class DetaliiPacienti extends AppCompatActivity {
         editeaza_s=findViewById(R.id.editeaza_supraveghetor);
         medicatie=findViewById(R.id.medicatie);
         istoricpac=findViewById(R.id.istoricpac);
+        localizeaza=findViewById(R.id.localizeaza);
         db= FirebaseDatabase.getInstance().getReference().child("users");
 
         medicatie.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +77,13 @@ public class DetaliiPacienti extends AppCompatActivity {
                 Intent i=new Intent(DetaliiPacienti.this, IstoricPacientDoctor.class);
                 i.putExtra("uid",uid);
                 startActivity(i);
+            }
+        });
+        localizeaza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
             }
         });
 
@@ -135,5 +154,7 @@ public class DetaliiPacienti extends AppCompatActivity {
             }
         });
 
+
     }
+
 }
