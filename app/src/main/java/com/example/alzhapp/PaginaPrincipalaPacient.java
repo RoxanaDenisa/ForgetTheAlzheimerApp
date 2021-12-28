@@ -3,14 +3,18 @@ package com.example.alzhapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.*;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +25,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,8 +42,11 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class PaginaPrincipalaPacient extends AppCompatActivity {
+    private static final int PERMISSIONS_FINE_LOCATION = 99;
     private Button apeleaza_supraveghetor;
     private Button apeleaza_doctor;
+    private LocationRequest lr;
+    private FusedLocationProviderClient locatie;
     RecyclerView recyclerView;
     DatabaseReference database;
     DatabaseReference db;
@@ -155,8 +166,27 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                 });
             }
         });
+        updateGPS();
     }
-//alarma trebuie sa tina maxim jumatate de ora si minim pana isi ia pastila (ceva venit de la bratara)
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case PERMISSIONS_FINE_LOCATION:
+            if (grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                updateGPS();
+            }
+            else{
+                Toast.makeText(this, "Aplicatia necesita permisiuni", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            break;
+        }
+    }
+
+    //alarma trebuie sa tina maxim jumatate de ora si minim pana isi ia pastila (ceva venit de la bratara)
     //daca dupa 30min nu si.a luat pastila va aparea alerta la doctor pt pacientul respectiv
     private void setAlarm(int ora) {
         Calendar cal= Calendar.getInstance();
@@ -182,5 +212,26 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         }
         Toast.makeText(this,"Your Alarm is Cancel",Toast.LENGTH_LONG).show();
         MyReceiver.ringtone.stop();
+    }
+    private void updateGPS(){
+        locatie= LocationServices.getFusedLocationProviderClient(PaginaPrincipalaPacient.this);
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
+            locatie.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                         updateUIValues(location);
+                }
+            });
+        }
+        else{
+            if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
+                requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_FINE_LOCATION);
+            }
+        }
+    }
+    private void updateUIValues(Location location){
+        System.out.println(String.valueOf(location.getLatitude()));
+        System.out.println(String.valueOf(location.getLongitude()));
+        //locatie= LocationServices.getFusedLocationProviderClient(DetaliiPacienti.this);
     }
     }
