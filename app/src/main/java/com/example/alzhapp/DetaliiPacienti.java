@@ -38,16 +38,11 @@ public class DetaliiPacienti extends AppCompatActivity {
     private Button medicatie;
     private Button istoricpac;
     private Button localizeaza;
-    LocationRequest lr;
-    private FusedLocationProviderClient locatie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
         super.onCreate(savedInstanceState);
-        lr = LocationRequest.create()
-                .setInterval(1000*30)
-                .setFastestInterval(1000*5)
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
         setContentView(R.layout.activity_detalii_pacienti);
         numeP=findViewById(R.id.numeP);
         telefonP=findViewById(R.id.telefonP);
