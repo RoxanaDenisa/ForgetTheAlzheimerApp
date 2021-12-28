@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:duration="20"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.alzhapp.IstoricPacientDoctor"
+    android:background="#07040D"
+    android:paddingTop="0dp"
+    >
+    <LinearLayout
+
+        android:id="@+id/istoriculpdv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+        <TextView
+
+            android:layout_marginTop="15dp"
+            style="@style/texte"
+            android:paddingTop="20dp"
+            android:text="@string/istoricul_pacient" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_below="@+id/istoriculpdv"
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myBoxIstoricP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -31,7 +31,8 @@ public class DetaliiPacienti extends AppCompatActivity {
     private DatabaseReference db;
     private Button editeaza_p;
     private Button editeaza_s;
-    private Button medicamentatie;
+    private Button medicatie;
+    private Button istoricpac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
@@ -44,14 +45,24 @@ public class DetaliiPacienti extends AppCompatActivity {
         telefonS=findViewById(R.id.telefonS);
         editeaza_p=findViewById(R.id.editeaza_pacient);
         editeaza_s=findViewById(R.id.editeaza_supraveghetor);
-        medicamentatie=findViewById(R.id.medicamentatie);
+        medicatie=findViewById(R.id.medicatie);
+        istoricpac=findViewById(R.id.istoricpac);
         db= FirebaseDatabase.getInstance().getReference().child("users");
 
-        medicamentatie.setOnClickListener(new View.OnClickListener() {
+        medicatie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
+                //FirebaseAuth.getInstance().signOut();
                 Intent i=new Intent(DetaliiPacienti.this, Medicatie.class);
+                i.putExtra("uid",uid);
+                startActivity(i);
+            }
+        });
+        istoricpac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //FirebaseAuth.getInstance().signOut();
+                Intent i=new Intent(DetaliiPacienti.this, IstoricPacientDoctor.class);
                 i.putExtra("uid",uid);
                 startActivity(i);
             }

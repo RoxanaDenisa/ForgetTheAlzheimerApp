@@ -146,13 +146,14 @@
 
         </RelativeLayout>
         <Button
-            android:id="@+id/medicamentatie"
+            android:id="@+id/medicatie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/mybutton2"
             android:text="Medicație pacient"
             />
         <Button
+            android:id="@+id/istoricpac"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/mybutton2"
