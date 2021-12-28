@@ -74,7 +74,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-
+//aici
                     Medicament m = dataSnapshot.getValue(Medicament.class);
                     String n=m.getNume();
                     String o=m.getOra();
