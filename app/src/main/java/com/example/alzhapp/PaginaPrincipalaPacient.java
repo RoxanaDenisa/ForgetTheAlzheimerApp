@@ -342,7 +342,6 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             Coordonate coord = new Coordonate(latitude, longitude);
             dbRef.child("locatie").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(coord);
 
-            Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
         } }
         else {
             locationTrack.showSettingsAlert();
