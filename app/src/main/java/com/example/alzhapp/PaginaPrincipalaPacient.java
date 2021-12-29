@@ -28,7 +28,9 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +55,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
     IstoricAdapter istoricAdapter;
     ArrayList<Istoric> list;
     private FirebaseUser user;
+    private DatabaseReference dbRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         user=FirebaseAuth.getInstance().getCurrentUser();
@@ -74,7 +77,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//aici
+
                     Medicament m = dataSnapshot.getValue(Medicament.class);
                     String n=m.getNume();
                     String o=m.getOra();
@@ -232,6 +235,9 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
     private void updateUIValues(Location location){
         System.out.println(String.valueOf(location.getLatitude()));
         System.out.println(String.valueOf(location.getLongitude()));
-        //locatie= LocationServices.getFusedLocationProviderClient(DetaliiPacienti.this);
-    }
+        dbRef= FirebaseDatabase.getInstance().getReference();
+        Coordonate coord = new Coordonate(location.getLatitude(), location.getLongitude());
+        dbRef.child("locatie").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(coord);
+        }
+
     }
