@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(MainActivity.this, com.example.alzhapp.InregistrareDoctor.class);
                 startActivity(i);
+                finish();
             }
         });
         moveToAutentificare.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(MainActivity.this, com.example.alzhapp.Autentificare.class);
                 startActivity(i);
+                finish();
             }
         });
         sendData.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                                                             Toast.makeText(MainActivity.this, "Cont creat", Toast.LENGTH_SHORT).show();
                                                             Intent i=new Intent(MainActivity.this, com.example.alzhapp.Autentificare.class);
                                                             startActivity(i);
+                                                            finish();
                                                         }
                                                         else
                                                         {

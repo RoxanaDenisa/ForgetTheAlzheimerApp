@@ -52,6 +52,7 @@ public class Autentificare extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(Autentificare.this, com.example.alzhapp.MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         autentificare.setOnClickListener(new View.OnClickListener() {

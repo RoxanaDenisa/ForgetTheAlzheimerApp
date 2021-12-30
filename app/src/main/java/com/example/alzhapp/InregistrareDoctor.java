@@ -54,6 +54,7 @@ public class InregistrareDoctor extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(InregistrareDoctor.this, com.example.alzhapp.MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         moveToAutentificare.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,8 @@ public class InregistrareDoctor extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(InregistrareDoctor.this, com.example.alzhapp.Autentificare.class);
                 startActivity(i);
+                finish();
+
             }
         });
         creare.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +105,7 @@ public class InregistrareDoctor extends AppCompatActivity {
                                                             Toast.makeText(InregistrareDoctor.this, "Cont creat", Toast.LENGTH_SHORT).show();
                                                             Intent i=new Intent(InregistrareDoctor.this, com.example.alzhapp.Autentificare.class);
                                                             startActivity(i);
+                                                            finish();
                                                         }
                                                         else
                                                         {
