@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/drawable-anydpi/ic_action_back.xml" value="0.2703125" />
         <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/activity_adaugare_medicament.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/activity_detalii_pacienti.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/activity_istoric_pacient_doctor.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/activity_medicatie.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/activity_pagina_principala_doctor.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/activity_pagina_principala_pacient.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/Roxi/Desktop/CHS/ForgetTheAlzheimerApp/app/src/main/res/layout/medicamente_afisare.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Roxi/Desktop/ForgetTheAlzheimerApp/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Roxi/Desktop/ForgetTheAlzheimerApp/app/src/main/res/drawable-anydpi/ic_cancel.xml" value="0.25092592592592594" />
         <entry key="..\:/Users/Roxi/Desktop/ForgetTheAlzheimerApp/app/src/main/res/drawable-anydpi/ic_check.xml" value="0.25092592592592594" />

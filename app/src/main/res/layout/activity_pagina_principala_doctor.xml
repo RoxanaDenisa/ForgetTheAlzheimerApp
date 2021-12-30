@@ -14,7 +14,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,6 +32,7 @@
                 android:src="@drawable/ic_logout" />
         </RelativeLayout>
         <LinearLayout
+            android:layout_marginLeft="20dp"
             android:layout_below="@+id/layout"
             android:id="@+id/layout2"
             android:layout_width="match_parent"
@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
+            android:layout_marginLeft="20dp"
             android:paddingTop="20dp"
             android:id="@+id/pacientiiDvs"
             style="@style/texte"

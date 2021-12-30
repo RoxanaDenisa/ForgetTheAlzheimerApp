@@ -44,6 +44,7 @@ public class PaginaPrincipalaDoctor extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(PaginaPrincipalaDoctor.this,Autentificare.class));
+                finish();
             }
         });
         user=FirebaseAuth.getInstance().getCurrentUser();

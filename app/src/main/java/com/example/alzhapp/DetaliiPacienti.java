@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -40,6 +41,7 @@ public class DetaliiPacienti extends AppCompatActivity {
     private Button medicatie;
     private Button istoricpac;
     private Button localizeaza;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
@@ -57,7 +59,18 @@ public class DetaliiPacienti extends AppCompatActivity {
         istoricpac=findViewById(R.id.istoricpac);
         localizeaza=findViewById(R.id.localizeaza);
         db= FirebaseDatabase.getInstance().getReference().child("users");
+        back=findViewById(R.id.back);
 
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(DetaliiPacienti.this, PaginaPrincipalaDoctor.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
         medicatie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +78,7 @@ public class DetaliiPacienti extends AppCompatActivity {
                 Intent i=new Intent(DetaliiPacienti.this, Medicatie.class);
                 i.putExtra("uid",uid);
                 startActivity(i);
+                finish();
             }
         });
         istoricpac.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +88,7 @@ public class DetaliiPacienti extends AppCompatActivity {
                 Intent i=new Intent(DetaliiPacienti.this, IstoricPacientDoctor.class);
                 i.putExtra("uid",uid);
                 startActivity(i);
+                finish();
             }
         });
         localizeaza.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +107,7 @@ public class DetaliiPacienti extends AppCompatActivity {
                             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                             mapIntent.setPackage("com.google.android.apps.maps");
                             startActivity(mapIntent);
+
 
                     }
 

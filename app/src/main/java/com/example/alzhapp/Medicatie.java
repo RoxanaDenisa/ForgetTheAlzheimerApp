@@ -25,6 +25,7 @@ public class Medicatie extends AppCompatActivity {
     DatabaseReference database;
     MedicamentAdapter medicamentAdapter;
     ArrayList<Medicament> list;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
@@ -32,13 +33,26 @@ public class Medicatie extends AppCompatActivity {
         setContentView(R.layout.activity_medicatie);
 
         adaugare=findViewById(R.id.adaugare);
+        back=findViewById(R.id.back);
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(Medicatie.this, DetaliiPacienti.class);
+                i.putExtra("uid",uid);
+                startActivity(i);
+                finish();
+
+            }
+        });
         adaugare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
                 Intent i=new Intent(Medicatie.this,AdaugareMedicament.class);
                 i.putExtra("uid",uid);
                 startActivity(i);
+                finish();
             }
         });
         recyclerView = findViewById(R.id.myBoxMedicament);

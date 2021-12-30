@@ -39,6 +39,7 @@ public class IstoricPacientDoctor extends AppCompatActivity {
     DatabaseReference db;
     IstoricAdapter istoricAdapter;
     ArrayList<Istoric> list;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String uid=getIntent().getStringExtra("uid");
@@ -54,7 +55,20 @@ public class IstoricPacientDoctor extends AppCompatActivity {
         list = new ArrayList<Istoric>();
         istoricAdapter = new IstoricAdapter(this, list);
         recyclerView.setAdapter(istoricAdapter);
+        back=findViewById(R.id.back);
 
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i=new Intent(IstoricPacientDoctor.this, DetaliiPacienti.class);
+                i.putExtra("uid",uid);
+                startActivity(i);
+                finish();
+
+            }
+        });
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
