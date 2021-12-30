@@ -11,6 +11,20 @@
     android:paddingTop="0dp"
     android:orientation="vertical"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout"
+        android:gravity="left">
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#07040D"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_action_back" />
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:padding="15dp"
             android:layout_marginBottom="1dp"

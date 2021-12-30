@@ -10,6 +10,20 @@
     android:background="#07040D"
     android:paddingTop="0dp"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout"
+        android:gravity="left">
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#07040D"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/ic_action_back" />
+    </RelativeLayout>
     <LinearLayout
 
         android:id="@+id/istoriculpdv"

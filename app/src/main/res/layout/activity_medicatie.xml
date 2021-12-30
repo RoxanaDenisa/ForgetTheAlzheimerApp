@@ -13,15 +13,26 @@
 
 
         <LinearLayout
-            android:paddingTop="16dp"
-            android:paddingLeft="26dp"
             android:paddingBottom="16dp"
-            android:paddingRight="26dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
             >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout"
+                android:gravity="left">
+                <ImageButton
+                    android:id="@+id/back"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="#07040D"
+                    android:scaleX="2"
+                    android:scaleY="2"
+                    android:src="@drawable/ic_action_back" />
+            </RelativeLayout>
             <TextView
                 android:text="@string/medicatie"
                 style="@style/titlu" />
