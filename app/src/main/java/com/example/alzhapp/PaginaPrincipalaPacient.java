@@ -78,6 +78,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
 
     //pt repetitie
     private Handler mHandler = new Handler();
+    private Handler mHandler2 = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,6 +207,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         });
 
         mToastRunnable.run();
+        mToastRunnable1.run();
 
     }
 
@@ -218,7 +220,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH),
                 ora,
-                0,
+                58,
                 0);
         if (cal.getTime().after(Calendar.getInstance().getTime())) {
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -228,7 +230,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         }
     }
 
-    private void Alarm_cancel(int ora) {
+    public void Alarm_cancel(int ora) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -325,7 +327,31 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         @Override
         public void run() {
             getLocation();
-            mHandler.postDelayed(this, 1000*60);
+            mHandler.postDelayed(this, 1000*10);
+        }
+    };
+    //bratara si cutie:
+    private Runnable mToastRunnable1 = new Runnable() {
+        @Override
+        public void run() {
+            Calendar calend=Calendar.getInstance();
+
+            if (calend.get(Calendar.HOUR_OF_DAY)*60+ calend.get(Calendar.MINUTE)==MyReceiver.getOraApel()+2){
+
+                Alarm_cancel(calend.get(Calendar.HOUR_OF_DAY));
+                MyReceiver.setOk(0);
+            }
+            if(MyReceiver.getOk()==2) {
+                Alarm_cancel(calend.get(Calendar.HOUR_OF_DAY));
+                MyReceiver.setOk(0);
+                dbRef= FirebaseDatabase.getInstance().getReference();
+                Bratara b= new Bratara(0);
+                dbRef.child("bratara").setValue(b);
+
+            }
+
+            mHandler2.postDelayed(this, 1000);
+
         }
     };
 
