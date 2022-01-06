@@ -12,7 +12,16 @@
             android:orientation="horizontal"
             android:background="@drawable/my_box"
             android:padding="18dp">
-
+            <ImageButton
+                android:id="@+id/alert"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="#2D2527"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:src="@drawable/ic_action_exclam"
+                android:visibility="gone"
+                />
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"

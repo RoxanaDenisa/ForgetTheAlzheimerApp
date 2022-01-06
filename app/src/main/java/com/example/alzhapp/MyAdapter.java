@@ -15,17 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.core.UserWriteRecord;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Users> list;
-
+    DatabaseReference db;
     public MyAdapter(Context context, ArrayList<Users> list) {
         this.context = context;
         this.list = list;
@@ -42,7 +45,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         Users user = list.get(position);
         holder.name.setText(user.getNumeComplet());
-
+        if(user.getMedicament_neluat())
+            holder.v.setVisibility(View.VISIBLE);
+           else
+            holder.v.setVisibility(View.GONE);
         //vizualizare informatii pacienti
         holder.showInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +56,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 String uid=list.get(holder.getAdapterPosition()).getUid();
                 Intent i=new Intent(context, com.example.alzhapp.DetaliiPacienti.class);
                 i.putExtra("uid",uid);
+                db= FirebaseDatabase.getInstance().getReference().child("users");
+                Map<String, Object> map=new HashMap<>();
+                map.put("medicament_neluat",false);
+                db.child(uid).updateChildren(map);
                 context.startActivity(i);
 
             }
@@ -99,13 +109,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView name;
         ImageButton delBtn;
         ImageButton showInfo;
+        ImageButton v;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             delBtn=itemView.findViewById(R.id.delete_btn);
             showInfo=itemView.findViewById(R.id.view_btn);
-
+            v=itemView.findViewById(R.id.alert);
         }
     }
 

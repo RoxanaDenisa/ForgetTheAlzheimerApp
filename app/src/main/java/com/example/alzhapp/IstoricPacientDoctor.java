@@ -88,9 +88,7 @@ public class IstoricPacientDoctor extends AppCompatActivity {
                         String ora = String.valueOf(oi + ii * poz);
                         Istoric istoric = new Istoric(n, ora);
                         poz++;
-                        if(!exist(list,istoric)) {
-                            list.add(istoric);
-                        }
+                        add(list,istoric);
                         Collections.sort(list, Istoric.ordonare);
 
                     }
@@ -107,12 +105,14 @@ public class IstoricPacientDoctor extends AppCompatActivity {
         });
 
     }
-    private boolean exist(ArrayList<Istoric> l, Istoric i){
+    private void add(ArrayList<Istoric> l, Istoric i){
         for (Istoric ist: l){
             if (ist.getNume().equals(i.getNume())&& ist.getOraInt()==i.getOraInt()){
-                return true;
+                l.remove(ist);
+                list.add(i);
+                return;
             }
         }
-        return false;
+        list.add(i);
     }
 }
