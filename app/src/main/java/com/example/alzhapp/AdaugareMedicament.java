@@ -60,7 +60,7 @@ public class AdaugareMedicament extends AppCompatActivity {
                     Toast.makeText(AdaugareMedicament.this,"Toate câmpurile trebuie completate", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Medicament m=new Medicament(numeMedicament1,oraReferinta1,interval1,uid);
+                    Medicament m=new Medicament(numeMedicament1,oraReferinta1,interval1,uid,0);
                     db.child("medicament").child(uid).child(numeMedicament1).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

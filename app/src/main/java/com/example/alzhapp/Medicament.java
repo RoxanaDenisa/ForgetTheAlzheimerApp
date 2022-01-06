@@ -5,11 +5,13 @@ public class Medicament {
     private String ora;
     private String interv;
     private String uidPacient;
-    public Medicament(String nume, String ora, String interv, String uidPacient) {
+    private int luat;
+    public Medicament(String nume, String ora, String interv, String uidPacient, int luat) {
         this.nume = nume;
         this.ora = ora;
         this.interv = interv;
         this.uidPacient=uidPacient;
+        this.luat=luat;
     }
     public Medicament(){}
     public String getNume() {
@@ -26,5 +28,13 @@ public class Medicament {
 
     public String getUidPacient() {
         return uidPacient;
+    }
+
+    public int getLuat() {
+        return luat;
+    }
+
+    public void setLuat(int luat) {
+        this.luat = luat;
     }
 }

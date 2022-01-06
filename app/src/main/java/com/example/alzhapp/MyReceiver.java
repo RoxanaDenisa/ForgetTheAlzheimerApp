@@ -33,15 +33,16 @@ public class MyReceiver extends BroadcastReceiver {
     private static boolean shutdown=false;
     private Handler handler;
     private static int oraApel;
+    public static String nume;
     @Override
     public void onReceive(Context context, Intent intent) {
         ringtone = RingtoneManager.getRingtone(context, alarmUri);
         ringtone.play();
+        nume=intent.getStringExtra("nume");
         Calendar c=Calendar.getInstance();
         oraApel=c.get(Calendar.HOUR_OF_DAY)*60+c.get(Calendar.MINUTE);;
         shutdown=false;
         handler = new Handler();
-        System.out.println(oraApel + "AIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIICIII");
         final Runnable r = new Runnable() {
             public void run() {
                 if (shutdown==false) {

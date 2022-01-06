@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,10 +35,13 @@ public class IstoricAdapter extends RecyclerView.Adapter<IstoricAdapter.MyViewHo
 
     Context context;
     ArrayList<Istoric> list;
+    String uid;
+    DatabaseReference db;
 
-    public IstoricAdapter(Context context, ArrayList<Istoric> list) {
+    public IstoricAdapter(Context context, ArrayList<Istoric> list, String uid) {
         this.context = context;
         this.list = list;
+        this.uid=uid;
     }
     @NonNull
     @Override
@@ -47,21 +56,47 @@ public class IstoricAdapter extends RecyclerView.Adapter<IstoricAdapter.MyViewHo
         Istoric m = list.get(position);
         holder.name.setText(m.getNume());
         holder.ora.setText(m.getOra());
+        System.out.println(m.getNume()+" ********************"+ m.getOra());
         Calendar cal= Calendar.getInstance();
 
         cal.set(cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH),
                 m.getOraInt(),
-                0,
+                31,
                 0);
         if (cal.getTime().before(Calendar.getInstance().getTime())) {
-            //inca un if ca sa stim pe care o punem vizibila in functie de info de la bratara
-            holder.v1.setVisibility(View.VISIBLE);
+            db = FirebaseDatabase.getInstance().getReference().child("medicament").child(uid);
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Medicament u = dataSnapshot.getValue(Medicament.class);
+                    if (u.getNume().equals(m.getNume())){
+                        int k=u.getLuat() & (1<<(m.getOraInt()-1));
+                        if (k!=0){
+                            holder.v2.setVisibility(View.VISIBLE);
+                            holder.v1.setVisibility(View.INVISIBLE);
+                        }
+                        else{
+                            holder.v1.setVisibility(View.VISIBLE);
+                            holder.v2.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                    }}
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
 
         else{
             holder.v1.setVisibility(View.INVISIBLE);
+            holder.v2.setVisibility(View.INVISIBLE);
         }
     }
 

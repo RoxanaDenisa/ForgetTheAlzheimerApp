@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             try{
                                                 String newpas = encrypt(parola1);
-                                                Users pacient = new Users(FirebaseAuth.getInstance().getCurrentUser().getUid(),numeComplet1, adresa1, telefon1, numeSupraveghetor1, telefonSupraveghetor1, adresaMail1, newpas, mailDoctor1, "pacient");
+                                                Users pacient = new Users(FirebaseAuth.getInstance().getCurrentUser().getUid(),numeComplet1, adresa1, telefon1, numeSupraveghetor1, telefonSupraveghetor1, adresaMail1, newpas, mailDoctor1, "pacient",false);
                                                 dbRef.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(pacient).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {

@@ -79,7 +79,8 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
     //pt repetitie
     private Handler mHandler = new Handler();
     private Handler mHandler2 = new Handler();
-
+    private String uid;
+    private int l=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +98,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         }
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+        uid = user.getUid();
 
 
         recyclerView = findViewById(R.id.myBoxIstoric);
@@ -106,7 +107,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<Istoric>();
-        istoricAdapter = new IstoricAdapter(this, list);
+        istoricAdapter = new IstoricAdapter(this, list, uid);
         recyclerView.setAdapter(istoricAdapter);
 
         database.addValueEventListener(new ValueEventListener() {
@@ -124,13 +125,15 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                     while ((oi + ii * poz) < 24) {
 
                         // apelarea functiei de setare a alarmei ce are ca si parametru ora la care setez alarma
-                        setAlarm(oi + ii * poz);
+                        setAlarm(n,oi + ii * poz);
 
                         //Aadugarea in lista istoric pt adapter
                         String ora = String.valueOf(oi + ii * poz);
                         Istoric istoric = new Istoric(n, ora);
                         poz++;
-                        list.add(istoric);
+                        if(!exist(list,istoric)) {
+                            list.add(istoric);
+                        }
                         Collections.sort(list, Istoric.ordonare);
 
                     }
@@ -214,17 +217,20 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
 
     //alarma trebuie sa tina maxim jumatate de ora si minim pana isi ia pastila (ceva venit de la bratara)
     //daca dupa 30min nu si.a luat pastila va aparea alerta la doctor pt pacientul respectiv
-    private void setAlarm(int ora) {
+    private void setAlarm(String nume,int ora) {
         Calendar cal = Calendar.getInstance();
         cal.set(cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH),
                 ora,
-                58,
+                29,
                 0);
         if (cal.getTime().after(Calendar.getInstance().getTime())) {
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(this, MyReceiver.class);
+            Bundle b = new Bundle();
+            b.putString("nume", nume);
+            intent.putExtras(b);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ora, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
         }
@@ -237,7 +243,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         if (pendingIntent != null) {
             alarmManager.cancel(pendingIntent);
         }
-        Toast.makeText(this, "Your Alarm is Cancel", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Alarma a fost anulată", Toast.LENGTH_SHORT).show();
         MyReceiver.ringtone.stop();
     }
 
@@ -337,6 +343,12 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
             Calendar calend=Calendar.getInstance();
 
             if (calend.get(Calendar.HOUR_OF_DAY)*60+ calend.get(Calendar.MINUTE)==MyReceiver.getOraApel()+2){
+                db= FirebaseDatabase.getInstance().getReference().child("users");
+                Map<String, Object> map=new HashMap<>();
+                map.put("medicament_neluat",true);
+                db.child(uid).updateChildren(map);
+
+                modificare_luat(MyReceiver.nume,calend.get(Calendar.HOUR_OF_DAY));
 
                 Alarm_cancel(calend.get(Calendar.HOUR_OF_DAY));
                 MyReceiver.setOk(0);
@@ -372,5 +384,49 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         else {
             locationTrack.showSettingsAlert();
         }
+    }
+    private void modificare_luat(String nume, int ora){
+        //citire luat din bd
+        db= FirebaseDatabase.getInstance().getReference().child("medicament").child(uid);
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    Medicament u=ds.getValue(Medicament.class);
+
+                        if(u.getNume().equals(nume)) {
+                            l=u.getLuat();
+                            System.out.println(u.getLuat());
+                        }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //1 trebuie shiftat pe biti  la stanga cu ora
+        if(l!=-1){
+            l=l|(1<<(ora-1));
+            //modif in bd
+            db= FirebaseDatabase.getInstance().getReference().child("medicament");
+            Map<String, Object> map2=new HashMap<>();
+            map2.put("luat",l);
+            db.child(uid).child(nume).updateChildren(map2);
+        }
+        System.out.println(ora);
+
+    }
+    private boolean exist(ArrayList<Istoric> l, Istoric i){
+        for (Istoric ist: l){
+            if (ist.getNume().equals(i.getNume())&& ist.getOraInt()==i.getOraInt()){
+                return true;
+            }
+        }
+        return false;
     }
     }

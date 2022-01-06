@@ -53,7 +53,7 @@ public class IstoricPacientDoctor extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<Istoric>();
-        istoricAdapter = new IstoricAdapter(this, list);
+        istoricAdapter = new IstoricAdapter(this, list,uid);
         recyclerView.setAdapter(istoricAdapter);
         back=findViewById(R.id.back);
 
