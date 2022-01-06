@@ -6,6 +6,7 @@ public class Istoric {
     private String nume;
     private String ora;
 
+
     public Istoric(String nume, String ora) {
         this.nume = nume;
         this.ora = ora;

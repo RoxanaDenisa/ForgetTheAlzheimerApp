@@ -85,7 +85,7 @@ public class PaginaPrincipalaDoctor extends AppCompatActivity {
                     Users u = dataSnapshot.getValue(Users.class);
                     if(u.getTipUtilizator().equals("pacient"))
                         if(u.getMailDoctor().equals(m))
-                           list.add(u);
+                           add(list,u);
                 }
                 myAdapter.notifyDataSetChanged();
 
@@ -98,5 +98,14 @@ public class PaginaPrincipalaDoctor extends AppCompatActivity {
         });
 
     }
-
+    private void add(ArrayList<Users> l, Users i){
+        for (Users ist: l){
+            if (ist.getNumeComplet().equals(i.getNumeComplet())&& ist.getTelefon()==i.getTelefon()){
+                l.remove(ist);
+                list.add(i);
+                return;
+            }
+        }
+        list.add(i);
+    }
 }

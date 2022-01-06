@@ -53,7 +53,7 @@ public class IstoricPacientDoctor extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<Istoric>();
-        istoricAdapter = new IstoricAdapter(this, list);
+        istoricAdapter = new IstoricAdapter(this, list,uid);
         recyclerView.setAdapter(istoricAdapter);
         back=findViewById(R.id.back);
 
@@ -88,7 +88,7 @@ public class IstoricPacientDoctor extends AppCompatActivity {
                         String ora = String.valueOf(oi + ii * poz);
                         Istoric istoric = new Istoric(n, ora);
                         poz++;
-                        list.add(istoric);
+                        add(list,istoric);
                         Collections.sort(list, Istoric.ordonare);
 
                     }
@@ -104,4 +104,15 @@ public class IstoricPacientDoctor extends AppCompatActivity {
             }
         });
 
-    }}
+    }
+    private void add(ArrayList<Istoric> l, Istoric i){
+        for (Istoric ist: l){
+            if (ist.getNume().equals(i.getNume())&& ist.getOraInt()==i.getOraInt()){
+                l.remove(ist);
+                list.add(i);
+                return;
+            }
+        }
+        list.add(i);
+    }
+}
