@@ -62,10 +62,15 @@ public class DetaliiPacienti extends AppCompatActivity {
         back=findViewById(R.id.back);
 
 
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(DetaliiPacienti.this, PaginaPrincipalaDoctor.class);
+                db= FirebaseDatabase.getInstance().getReference().child("users");
+                Map<String, Object> map=new HashMap<>();
+                map.put("medicament_neluat",false);
+                db.child(uid).updateChildren(map);
                 startActivity(i);
                 finish();
 
@@ -107,6 +112,7 @@ public class DetaliiPacienti extends AppCompatActivity {
                             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                             mapIntent.setPackage("com.google.android.apps.maps");
                             startActivity(mapIntent);
+                            finish();
 
 
                     }

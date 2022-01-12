@@ -75,7 +75,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
     private ArrayList permissions = new ArrayList();
     private final static int ALL_PERMISSIONS_RESULT = 101;
     LocationTrack locationTrack;
-
+    public  static int sw=0;
     //pt repetitie
     private Handler mHandler = new Handler();
     private Handler mHandler2 = new Handler();
@@ -221,7 +221,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH),
                 ora,
-                27,
+                8,
                 0);
         if (cal.getTime().after(Calendar.getInstance().getTime())) {
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -340,7 +340,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
         public void run() {
             Calendar calend=Calendar.getInstance();
 
-            if (calend.get(Calendar.HOUR_OF_DAY)*60+ calend.get(Calendar.MINUTE)==MyReceiver.getOraApel()+2){
+            if (calend.get(Calendar.HOUR_OF_DAY)*60+ calend.get(Calendar.MINUTE)==MyReceiver.getOraApel()+1){
                 db= FirebaseDatabase.getInstance().getReference().child("users");
                 Map<String, Object> map=new HashMap<>();
                 map.put("medicament_neluat",true);
@@ -349,16 +349,24 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
                 modificare_luat(MyReceiver.nume,calend.get(Calendar.HOUR_OF_DAY));
 
                 Alarm_cancel(calend.get(Calendar.HOUR_OF_DAY));
-                MyReceiver.setOk(0);
-            }
+                }
+            if (calend.get(Calendar.HOUR_OF_DAY)*60+ calend.get(Calendar.MINUTE)==MyReceiver.getOraApel()+5){
+                MyReceiver.setOk(0);}
             if(MyReceiver.getOk()==2) {
                 Alarm_cancel(calend.get(Calendar.HOUR_OF_DAY));
-                MyReceiver.setOk(0);
-                dbRef= FirebaseDatabase.getInstance().getReference();
-                Bratara b= new Bratara(0);
-                dbRef.child("bratara").setValue(b);
+                if (sw==0){
+                recyclerView.invalidate();
+                recyclerView.setAdapter(istoricAdapter);
+                sw++;
+                }
+                //MyReceiver.setOk(0);
+                //dbRef= FirebaseDatabase.getInstance().getReference();
+                //Bratara b= new Bratara(0);
+                //dbRef.child("bratara").setValue(b);
 
             }
+
+
 
             mHandler2.postDelayed(this, 1000);
 
@@ -394,7 +402,7 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
 
                         if(u.getNume().equals(nume)) {
                             l=u.getLuat();
-                            System.out.println(u.getLuat());
+
                         }
 
                 }
@@ -406,17 +414,21 @@ public class PaginaPrincipalaPacient extends AppCompatActivity {
 
             }
         });
-
+        System.out.println(MyReceiver.getOk() + "Afiseaza ok AIIIIIIIIIIIIIIIIIIIIIIIICI");
+        System.out.println(l);
         //1 trebuie shiftat pe biti  la stanga cu ora
-        if(l!=-1){
-            l=l|(1<<(ora-1));
+        if(l!=-1 ){
+            if (MyReceiver.getOk()!=2)
+                l=l|(1<<(ora-1));
             //modif in bd
             db= FirebaseDatabase.getInstance().getReference().child("medicament");
             Map<String, Object> map2=new HashMap<>();
             map2.put("luat",l);
             db.child(uid).child(nume).updateChildren(map2);
+            System.out.println(ora);
+
         }
-        System.out.println(ora);
+
 
     }
     private void add(ArrayList<Istoric> l, Istoric i){

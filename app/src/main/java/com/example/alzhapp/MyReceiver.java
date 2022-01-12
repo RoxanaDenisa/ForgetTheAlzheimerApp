@@ -45,6 +45,7 @@ public class MyReceiver extends BroadcastReceiver {
         c=context;
         ringtone = RingtoneManager.getRingtone(context, alarmUri);
         ringtone.play();
+        PaginaPrincipalaPacient.sw=0;
         nume=intent.getStringExtra("nume");
         notificare(nume);
         Calendar c=Calendar.getInstance();
@@ -101,6 +102,11 @@ public class MyReceiver extends BroadcastReceiver {
 
         Calendar calend=Calendar.getInstance();
         if (calend.get(Calendar.HOUR_OF_DAY)*60+ calend.get(Calendar.MINUTE)==oraApel+2){
+
+            shutdown=true;
+
+        }
+        if(ok==2 ){
 
             shutdown=true;
         }

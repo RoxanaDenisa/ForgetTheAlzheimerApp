@@ -1,4 +1,5 @@
 package com.example.alzhapp;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,11 +57,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 String uid=list.get(holder.getAdapterPosition()).getUid();
                 Intent i=new Intent(context, com.example.alzhapp.DetaliiPacienti.class);
                 i.putExtra("uid",uid);
-                db= FirebaseDatabase.getInstance().getReference().child("users");
-                Map<String, Object> map=new HashMap<>();
-                map.put("medicament_neluat",false);
-                db.child(uid).updateChildren(map);
+
                 context.startActivity(i);
+                ((Activity)context).finish();
+
 
             }
         });
